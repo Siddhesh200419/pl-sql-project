@@ -1,7 +1,6 @@
 # pl-sql-project
 # Name: Siddhesh Ramdas Gite
 # Project Title: Tourism and Travel Management System
-# Tourism and Travel Management System
 
 ## Project Description
 
