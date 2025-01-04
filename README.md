@@ -59,7 +59,6 @@ The **Tourism and Travel Management System** is a comprehensive software applica
 
 - **Database**: Oracle Database
 - **Programming Language**: PL/SQL for database procedures, functions, and triggers.
-- **Frontend**: Can be developed using HTML, CSS, and JavaScript for a web-based interface.
 - **Backend**: PL/SQL scripts for data manipulation and business logic.
 - **Tools**: Oracle SQL Developer for database management and PL/SQL development.
 
@@ -73,7 +72,6 @@ The **Tourism and Travel Management System** is a comprehensive software applica
 6. **Deployment**: Deploy the system for use by travel agencies and customers.
 7. **Maintenance and Updates**: Regularly update the system based on user feedback and changing requirements.
 
-## Conclusion
 
-The **Tourism and Travel Management System** aims to enhance the efficiency of travel agencies and improve the overall experience for travelers. By leveraging the power of Oracle PL/SQL, this system will provide a robust and scalable solution for managing travel-related activities, ultimately contributing to the growth of the tourism industry.
+
 # steps (you can add snapshot)
