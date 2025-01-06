@@ -1,5 +1,5 @@
 # pl-sql-project
-# Name: Siddhesh Ramdas Gite
+# Name: Siddhesh Gite
 # Project Title: Tourism and Travel Management System
 
 ## Project Description
@@ -70,7 +70,3 @@ The **Tourism and Travel Management System** is a comprehensive software applica
 5. **Testing**: Conduct thorough testing to ensure all functionalities work as intended.
 6. **Deployment**: Deploy the system for use by travel agencies and customers.
 7. **Maintenance and Updates**: Regularly update the system based on user feedback and changing requirements.
-
-
-
-# steps (you can add snapshot)
