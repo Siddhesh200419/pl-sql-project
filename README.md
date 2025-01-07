@@ -9,240 +9,65 @@ The **Tourism and Travel Management System** is a database-driven application th
 
 ---
 
-## Database Structure
-The system consists of the following tables:
 
-### 1. `Customers`
-| Column Name    | Data Type         | Description                    |
-|----------------|-------------------|--------------------------------|
-| CustomerID     | NUMBER            | Unique ID for each customer     |
-| Name           | VARCHAR2(100)     | Name of the customer            |
-| Email          | VARCHAR2(100)     | Email address of the customer   |
-| Phone          | VARCHAR2(15)      | Phone number of the customer    |
-| Address        | VARCHAR2(200)     | Address of the customer         |
-| CreatedDate    | DATE              | Date the customer was created   |
+## The Database Schema
 
-### 2. `Agents`
-| Column Name    | Data Type         | Description                     |
-|----------------|-------------------|---------------------------------|
-| AgentID        | NUMBER            | Unique ID for each agent        |
-| Name           | VARCHAR2(100)     | Name of the agent               |
-| Email          | VARCHAR2(100)     | Email address of the agent      |
-| Phone          | VARCHAR2(15)      | Phone number of the agent       |
-| CommissionRate | NUMBER(5, 2)      | Commission rate for the agent   |
+This repository contains the SQL script for creating and managing the database schema for a system involving customers, agents, destinations, tour packages, bookings, and their related transactions.
 
-### 3. `Destinations`
-| Column Name    | Data Type         | Description                     |
-|----------------|-------------------|---------------------------------|
-| DestinationID  | NUMBER            | Unique ID for each destination  |
-| Name           | VARCHAR2(100)     | Name of the destination         |
-| Country        | VARCHAR2(100)     | Country of the destination      |
-| Description    | VARCHAR2(500)     | Description of the destination  |
-| Popularity     | NUMBER            | Popularity score of the destination |
+## Project Description
+This project aims to provide a robust database schema to support a travel management system. The system allows for managing customers, booking processes, payments, agent commissions, and feedback mechanisms efficiently. It is designed to handle:
 
-### 4. `TourPackages`
-| Column Name    | Data Type         | Description                     |
-|----------------|-------------------|---------------------------------|
-| PackageID      | NUMBER            | Unique ID for each package      |
-| Name           | VARCHAR2(100)     | Name of the tour package        |
-| DestinationID  | NUMBER            | Foreign key referencing `Destinations` |
-| Description    | VARCHAR2(500)     | Description of the package      |
-| Price          | NUMBER(10, 2)     | Price of the package            |
-| Duration       | NUMBER            | Duration of the package (in days) |
+- **Customer Management**: Storing customer details and tracking their bookings.
+- **Tour and Package Management**: Organizing destinations and tour packages.
+- **Financial Tracking**: Managing payments and generating revenue reports.
+- **Review and Feedback**: Collecting and analyzing customer reviews.
 
-### 5. `Bookings`
-| Column Name    | Data Type         | Description                     |
-|----------------|-------------------|---------------------------------|
-| BookingID      | NUMBER            | Unique ID for each booking      |
-| CustomerID     | NUMBER            | Foreign key referencing `Customers` |
-| PackageID      | NUMBER            | Foreign key referencing `TourPackages` |
-| BookingDate    | DATE              | Date of booking                 |
-| TotalAmount    | NUMBER(10, 2)     | Total amount of the booking     |
-| AgentID        | NUMBER            | Foreign key referencing `Agents` |
-| Status         | VARCHAR2(50)      | Status of the booking (e.g., Pending, Confirmed) |
+The schema is scalable and can be adapted for businesses in the travel and tourism industry to streamline operations and improve customer satisfaction.
 
-### 6. `Payments`
-| Column Name    | Data Type         | Description                     |
-|----------------|-------------------|---------------------------------|
-| PaymentID      | NUMBER            | Unique ID for each payment      |
-| BookingID      | NUMBER            | Foreign key referencing `Bookings` |
-| PaymentDate    | DATE              | Date of payment                 |
-| Amount         | NUMBER(10, 2)     | Payment amount                  |
-| PaymentMethod  | VARCHAR2(50)      | Method of payment (e.g., Credit Card, UPI) |
+## Features
+- **Comprehensive Schema**: Includes tables, procedures, and triggers for managing various aspects of the system.
+- **Flexible Procedures**: Automates booking, reporting, and review submissions.
+- **Dynamic Triggers**: Ensures data consistency and automates updates.
 
-### 7. `Transport`
-| Column Name    | Data Type         | Description                     |
-|----------------|-------------------|---------------------------------|
-| TransportID    | NUMBER            | Unique ID for each transport    |
-| Type           | VARCHAR2(50)      | Type of transport (e.g., Flight, Bus) |
-| Capacity       | NUMBER            | Capacity of the transport       |
-| PricePerSeat   | NUMBER(10, 2)     | Price per seat for the transport |
+## Database Objects
 
-### 8. `Reviews`
-| Column Name    | Data Type         | Description                     |
-|----------------|-------------------|---------------------------------|
-| ReviewID       | NUMBER            | Unique ID for each review       |
-| CustomerID     | NUMBER            | Foreign key referencing `Customers` |
-| PackageID      | NUMBER            | Foreign key referencing `TourPackages` |
-| Rating         | NUMBER            | Rating given by the customer (1 to 5) |
-| Comments       | VARCHAR2(1000)    | Comments given by the customer  |
-| ReviewDate     | DATE              | Date of the review              |
+### Tables
+- **Customers Table**: Stores customer information including name, email, phone, address, and creation date.
+- **Agents Table**: Manages details about agents, including their commission rates.
+- **Destinations Table**: Contains information about travel destinations.
+- **TourPackages Table**: Defines available tour packages and their details.
+- **Bookings Table**: Tracks customer bookings.
+- **Payments Table**: Logs payment information for bookings.
+- **Transport Table**: Manages transportation details for tours.
+- **Reviews Table**: Stores customer reviews and ratings.
 
----
+### Procedures
+- **CreateBooking**: Automates the process of creating a new booking.
+- **CancelBooking**: Handles booking cancellations.
+- **RevenueReport**: Generates a revenue report for a specified period.
+- **PopularDestinations**: Identifies the most frequently booked destinations.
+- **SubmitReview**: Records a customer's review for a tour.
+- **AssignTransport**: Assigns transportation for a booking.
 
-## Table Creation Scripts
-```sql
--- Creating Customers table
-CREATE TABLE Customers (
-    CustomerID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    Name VARCHAR2(100) NOT NULL,
-    Email VARCHAR2(100) UNIQUE NOT NULL,
-    Phone VARCHAR2(15),
-    Address VARCHAR2(200),
-    CreatedDate DATE DEFAULT SYSDATE
-);
+### Triggers
+- **UpdatePopularity**: Updates the popularity of destinations based on bookings.
+- **EnsurePayment**: Ensures a payment record exists for every booking.
 
--- Creating Agents table
-CREATE TABLE Agents (
-    AgentID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    Name VARCHAR2(100) NOT NULL,
-    Email VARCHAR2(100),
-    Phone VARCHAR2(15),
-    CommissionRate NUMBER(5, 2) DEFAULT 10
-);
+## Usage
+1. Clone the repository.
+2. Import the SQL script into your preferred database management system (e.g., Oracle, MySQL).
+3. Execute the script to create the necessary database structure.
 
--- Creating Destinations table
-CREATE TABLE Destinations (
-    DestinationID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    Name VARCHAR2(100) NOT NULL,
-    Country VARCHAR2(100) NOT NULL,
-    Description VARCHAR2(500),
-    Popularity NUMBER DEFAULT 0
-);
+## Requirements
+- SQL-compatible database system (e.g., Oracle, MySQL).
+- Basic understanding of SQL for modifications if needed.
 
--- Creating TourPackages table
-CREATE TABLE TourPackages (
-    PackageID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    Name VARCHAR2(100) NOT NULL,
-    DestinationID NUMBER REFERENCES Destinations(DestinationID),
-    Description VARCHAR2(500),
-    Price NUMBER(10, 2) NOT NULL,
-    Duration NUMBER NOT NULL -- in days
-);
-
--- Creating Bookings table
-CREATE TABLE Bookings (
-    BookingID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    CustomerID NUMBER REFERENCES Customers(CustomerID),
-    PackageID NUMBER REFERENCES TourPackages(PackageID),
-    BookingDate DATE DEFAULT SYSDATE,
-    TotalAmount NUMBER(10, 2) NOT NULL,
-    AgentID NUMBER REFERENCES Agents(AgentID),
-    Status VARCHAR2(50) DEFAULT 'Pending'
-);
-
--- Creating Payments table
-CREATE TABLE Payments (
-    PaymentID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    BookingID NUMBER REFERENCES Bookings(BookingID),
-    PaymentDate DATE DEFAULT SYSDATE,
-    Amount NUMBER(10, 2) NOT NULL,
-    PaymentMethod VARCHAR2(50) CHECK (PaymentMethod IN ('Credit Card', 'Debit Card', 'UPI', 'Net Banking'))
-);
-
--- Creating Transport table
-CREATE TABLE Transport (
-    TransportID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    Type VARCHAR2(50) CHECK (Type IN ('Flight', 'Bus', 'Train', 'Car', 'Helicopter', 'Boat', 'Bike', 'Metro', 'Tram', 'SUV')),
-    Capacity NUMBER NOT NULL,
-    PricePerSeat NUMBER(10, 2) NOT NULL
-);
-
--- Creating Reviews table
-CREATE TABLE Reviews (
-    ReviewID NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-    CustomerID NUMBER REFERENCES Customers(CustomerID),
-    PackageID NUMBER REFERENCES TourPackages(PackageID),
-    Rating NUMBER CHECK (Rating BETWEEN 1 AND 5),
-    Comments VARCHAR2(1000),
-    ReviewDate DATE DEFAULT SYSDATE
-);
-```
-
----
-
-## Insertion Scripts
-```sql
--- Inserting data into Customers table
-INSERT INTO Customers (Name, Email, Phone, Address) VALUES ('John Doe', 'john.doe@example.com', '1234567890', '123 Main Street');
-INSERT INTO Customers (Name, Email, Phone, Address) VALUES ('Jane Smith', 'jane.smith@example.com', '9876543210', '456 Park Avenue');
-
--- Inserting data into Agents table
-INSERT INTO Agents (Name, Email, Phone, CommissionRate) VALUES ('Michael Brown', 'michael.brown@example.com', '555667788', 12.5);
-INSERT INTO Agents (Name, Email, Phone, CommissionRate) VALUES ('Lisa White', 'lisa.white@example.com', '666778899', 15);
-
--- Inserting data into Destinations table
-INSERT INTO Destinations (Name, Country, Description, Popularity) VALUES ('Paris', 'France', 'The city of lights and love', 5);
-INSERT INTO Destinations (Name, Country, Description, Popularity) VALUES ('Rome', 'Italy', 'The eternal city with rich history', 4);
-
--- Inserting data into TourPackages table
-INSERT INTO TourPackages (Name, DestinationID, Description, Price, Duration) VALUES ('Romantic Getaway', 1, 'A romantic trip to Paris', 2500.00, 7);
-INSERT INTO TourPackages (Name, DestinationID, Description, Price, Duration) VALUES ('Historical Tour', 2, 'Discover the ancient wonders of Rome', 3000.00, 10);
-```
-
----
-
-## Procedure to Calculate Total Payments
-```sql
-CREATE OR REPLACE PROCEDURE Calculate_Total_Payments
-AS
-    Total_Amount NUMBER;
-BEGIN
-    SELECT SUM(Amount) INTO Total_Amount FROM Payments;
-    DBMS_OUTPUT.PUT_LINE('Total Payment Amount: ' || Total_Amount);
-END;
-/
-```
-
----
-
-## Trigger to Update Payment Status
-```sql
-CREATE OR REPLACE TRIGGER Update_Payment_Status
-AFTER INSERT ON Payments
-FOR EACH ROW
-BEGIN
-    UPDATE Bookings
-    SET Status = 'Paid'
-    WHERE BookingID = :NEW.BookingID;
-END;
-/
-```
-
----
-
-## How to Run
-1. Clone this repository:
-```bash
-git clone https://github.com/yourusername/tourism-travel-management.git
-```
-2. Connect to your Oracle Database using SQL*Plus or any preferred tool.
-3. Execute the scripts in the following order:
-   - `table_creation.sql`
-   - `data_insertion.sql`
-   - `procedures.sql`
-   - `triggers.sql`
-4. Test the procedures and triggers to ensure the system is working as expected.
-
----
-
-## Future Enhancements
-- Implement a front-end interface using web technologies.
-- Add more features such as user authentication, reporting, and analytics.
-- Improve error handling in PL/SQL scripts.
-
----
+## Contributing
+Feel free to fork this repository, make improvements, and submit pull requests. Contributions are always welcome.
 
 ## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is open-source and available under the [MIT License](LICENSE).
 
+---
+
+If you have questions or encounter any issues, please open an issue in this repository or contact the maintainer.
