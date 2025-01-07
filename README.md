@@ -62,12 +62,5 @@ The schema is scalable and can be adapted for businesses in the travel and touri
 - SQL-compatible database system (e.g., Oracle, MySQL).
 - Basic understanding of SQL for modifications if needed.
 
-## Contributing
-Feel free to fork this repository, make improvements, and submit pull requests. Contributions are always welcome.
-
-## License
-This project is open-source and available under the [MIT License](LICENSE).
-
 ---
 
-If you have questions or encounter any issues, please open an issue in this repository or contact the maintainer.
